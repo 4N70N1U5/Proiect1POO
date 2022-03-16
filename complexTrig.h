@@ -8,8 +8,6 @@ class ComplexAlg;
 
 class ComplexTrig
 {
-private:
-    long double mdl, arg;
 public:
     ComplexTrig();
     ComplexTrig(long double, long double);
@@ -41,6 +39,8 @@ public:
     friend std::ostream& operator<<(std::ostream&, const ComplexTrig&);
     
     ComplexAlg conversieFormaAlg();
+private:
+    long double mdl, arg;
 };
 
 ComplexTrig operator*(long double, ComplexTrig);

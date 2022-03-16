@@ -8,8 +8,6 @@ class ComplexTrig;
 
 class ComplexAlg
 {
-private:
-    long double re, im;
 public:
     ComplexAlg();
     ComplexAlg(long double, long double);
@@ -57,6 +55,8 @@ public:
     long double modul();
     ComplexAlg conjugat();
     ComplexTrig conversieFormaTrig();
+private:
+    long double re, im;
 };
 
 ComplexAlg operator+(long double, ComplexAlg);
