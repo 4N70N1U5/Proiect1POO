@@ -118,13 +118,6 @@ bool ComplexTrig::operator!=(ComplexTrig z)
 
 std::istream& operator>>(std::istream& i, ComplexTrig& z)
 {
-    /*using namespace std;
-    {
-        // cout << "Modulul numarului complex in forma trigonometrica: ";
-        i >> z.mdl;
-        // cout << "Argumentul numarului complex in forma trigonometrica: ";
-        i >> z.arg;
-    } // namespace std*/
     i >> z.mdl >> z.arg;
     return i;
 }

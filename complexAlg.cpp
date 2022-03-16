@@ -194,16 +194,6 @@ bool ComplexAlg::operator!=(ComplexAlg z)
 
 std::istream& operator>>(std::istream& i, ComplexAlg& z)
 {
-    /*using namespace std;
-    {
-        // #define getName(c) # c
-        // cout << "Partea reala a numarului ComplexAlg " << getName(c) << ": ";
-        // cout << "Partea reala a numarului complex in forma algebrica: ";
-        i >> z.re;
-        // cout << "Partea imaginara a numarului ComplexAlg" << watch(c) << ": ";
-        // cout << "Partea imaginara a numarului complex in forma algebrica: ";
-        i >> z.im;
-    } // namespace std;*/
     i >> z.re >> z.im;
     return i;
 }
