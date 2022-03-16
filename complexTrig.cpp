@@ -1,4 +1,5 @@
 #include "complexTrig.h"
+#include "complexAlg.h"
 #include <iostream>
 #include <cmath>
 
@@ -11,14 +12,12 @@ ComplexTrig::ComplexTrig(long double r, long double t)
 {
     mdl = r;
     arg = t;
-    f_alg = this->conversieFormaAlg();
 }
 
 ComplexTrig::ComplexTrig(const ComplexTrig& pz)
 {
     mdl = pz.mdl;
     arg = pz.arg;
-    f_alg = this->conversieFormaAlg();
 }
 
 void ComplexTrig::setModul(long double r)
@@ -48,10 +47,22 @@ ComplexTrig ComplexTrig::operator*=(ComplexTrig z)
     return *this;
 }
 
+ComplexTrig ComplexTrig::operator*=(long double a)
+{
+    mdl *= a;
+    return *this;
+}
+
 ComplexTrig ComplexTrig::operator/=(ComplexTrig z)
 {
     mdl /= z.mdl;
     arg -= z.arg;
+    return *this;
+}
+
+ComplexTrig ComplexTrig::operator/=(long double a)
+{
+    mdl /= a;
     return *this;
 }
 
@@ -63,11 +74,35 @@ ComplexTrig ComplexTrig::operator*(ComplexTrig z)
     return x;
 }
 
+ComplexTrig ComplexTrig::operator*(long double a)
+{
+    ComplexTrig x;
+    x.mdl = mdl * a;
+    x.arg = arg;
+    return x;
+}
+
+ComplexTrig operator*(long double a, ComplexTrig z)
+{
+    ComplexTrig x;
+    x.mdl = z.mdl * a;
+    x.arg = z.arg;
+    return x;
+}
+
 ComplexTrig ComplexTrig::operator/(ComplexTrig z)
 {
     ComplexTrig x;
     x.mdl = mdl / z.mdl;
     x.arg = arg - z.arg;
+    return x;
+}
+
+ComplexTrig ComplexTrig::operator/(long double a)
+{
+    ComplexTrig x;
+    x.mdl = mdl / a;
+    x.arg = arg;
     return x;
 }
 
@@ -83,13 +118,14 @@ bool ComplexTrig::operator!=(ComplexTrig z)
 
 std::istream& operator>>(std::istream& i, ComplexTrig& z)
 {
-    using namespace std;
+    /*using namespace std;
     {
-        cout << "Modulul numarului complex in forma trigonometrica: ";
+        // cout << "Modulul numarului complex in forma trigonometrica: ";
         i >> z.mdl;
-        cout << "Argumentul numarului complex in forma trigonometrica: ";
+        // cout << "Argumentul numarului complex in forma trigonometrica: ";
         i >> z.arg;
-    } // namespace std
+    } // namespace std*/
+    i >> z.mdl >> z.arg;
     return i;
 }
 

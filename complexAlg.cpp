@@ -1,4 +1,5 @@
 #include "complexAlg.h"
+#include "complexTrig.h"
 #include <iostream>
 #include <cmath>
 
@@ -11,14 +12,12 @@ ComplexAlg::ComplexAlg(long double a, long double b)
 {
     re = a;
     im = b;
-    f_trig = this->conversieFormaTrig();
 }
 
 ComplexAlg::ComplexAlg(const ComplexAlg& pz)
 {
     re = pz.re;
     im = pz.im;
-    f_trig = this->conversieFormaTrig();
 }
     
 void ComplexAlg::setReal(long double a)
@@ -48,10 +47,22 @@ ComplexAlg ComplexAlg::operator+=(ComplexAlg z)
     return *this;
 }
 
+ComplexAlg ComplexAlg::operator+=(long double a)
+{
+    re += a;
+    return *this;
+}
+
 ComplexAlg ComplexAlg::operator-=(ComplexAlg z)
 {
     re -= z.re;
     im -= z.im;
+    return *this;
+}
+
+ComplexAlg ComplexAlg::operator-=(long double a)
+{
+    re -= a;
     return *this;
 }
 
@@ -62,10 +73,24 @@ ComplexAlg ComplexAlg::operator*=(ComplexAlg z)
     return *this;
 }
 
+ComplexAlg ComplexAlg::operator*=(long double a)
+{
+    re *= a;
+    im *= a;
+    return *this;
+}
+
 ComplexAlg ComplexAlg::operator/=(ComplexAlg z)
 {
     re = (re * z.re + im * z.im) / (z.re * z.re + z.im * z.im);
     im = (z.re * im - re * z.im) / (z.re * z.re + z.im * z.im);
+    return *this;
+}
+
+ComplexAlg ComplexAlg::operator/=(long double a)
+{
+    re /= a;
+    im /= a;
     return *this;
 }
 
@@ -85,6 +110,14 @@ ComplexAlg ComplexAlg::operator+(long double a)
     return x;
 }
 
+ComplexAlg operator+(long double a, ComplexAlg z)
+{
+    ComplexAlg x;
+    x.re = z.re + a;
+    x.im = z.im;
+    return x;
+}
+
 ComplexAlg ComplexAlg::operator-(ComplexAlg z)
 {
     ComplexAlg x;
@@ -101,6 +134,14 @@ ComplexAlg ComplexAlg::operator-(long double a)
     return x;
 }
 
+ComplexAlg operator-(long double a, ComplexAlg z)
+{
+    ComplexAlg x;
+    x.re = a - z.re;
+    x.im = -z.im;
+    return x;
+}
+
 ComplexAlg ComplexAlg::operator*(ComplexAlg z)
 {
     ComplexAlg x;
@@ -109,11 +150,35 @@ ComplexAlg ComplexAlg::operator*(ComplexAlg z)
     return x;
 }
 
+ComplexAlg ComplexAlg::operator*(long double a)
+{
+    ComplexAlg x;
+    x.re = re * a;
+    x.im = im * a;
+    return x;
+}
+
+ComplexAlg operator*(long double a, ComplexAlg z)
+{
+    ComplexAlg x;
+    x.re = z.re * a;
+    x.im = z.im * a;
+    return x;
+}
+
 ComplexAlg ComplexAlg::operator/(ComplexAlg z)
 {
     ComplexAlg x;
     x.re = (re * z.re + im * z.im) / (z.re * z.re + z.im * z.im);
     x.im = (z.re * im - re * z.im) / (z.re * z.re + z.im * z.im);
+    return x;
+}
+
+ComplexAlg ComplexAlg::operator/(long double a)
+{
+    ComplexAlg x;
+    x.re = re / a;
+    x.im = im / a;
     return x;
 }
 
@@ -129,16 +194,17 @@ bool ComplexAlg::operator!=(ComplexAlg z)
 
 std::istream& operator>>(std::istream& i, ComplexAlg& z)
 {
-    using namespace std;
+    /*using namespace std;
     {
         // #define getName(c) # c
         // cout << "Partea reala a numarului ComplexAlg " << getName(c) << ": ";
-        cout << "Partea reala a numarului complex in forma algebrica: ";
+        // cout << "Partea reala a numarului complex in forma algebrica: ";
         i >> z.re;
         // cout << "Partea imaginara a numarului ComplexAlg" << watch(c) << ": ";
-        cout << "Partea imaginara a numarului complex in forma algebrica: ";
+        // cout << "Partea imaginara a numarului complex in forma algebrica: ";
         i >> z.im;
-    } // namespace std;
+    } // namespace std;*/
+    i >> z.re >> z.im;
     return i;
 }
 
